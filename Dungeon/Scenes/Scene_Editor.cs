@@ -14,12 +14,12 @@ namespace Dungeon.Scenes
 
         }
 
-        internal override void OnCreate()
+        internal override void Load()
         {
 
         }
 
-        internal override void OnDestroy()
+        internal override void Unload()
         {
 
         }

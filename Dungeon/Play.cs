@@ -16,13 +16,13 @@ namespace Dungeon
         SceneManager sceneManager;
         PlayContentManager contentManager;
 
-        public static GameServices GameServices;
+        public static GameServices gameServices;
 
         public Play()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            graphics.PreferredBackBufferWidth = 1024;
         }
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace Dungeon
         /// </summary>
         protected override void Initialize()
         {
-            GameServices = new GameServices(this);
+            gameServices = new GameServices(this);
 
             contentManager = new PlayContentManager(Services, Content.RootDirectory);
-            GameServices.AddService<IContentService>(contentManager);
+            gameServices.AddService<IContentService>(contentManager);
 
             sceneManager = new SceneManager();
-            GameServices.AddService<ISceneService>(sceneManager);
+            gameServices.AddService<ISceneService>(sceneManager);
 
 
             base.Initialize();
@@ -55,7 +55,6 @@ namespace Dungeon
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sceneManager.SwitchTo(SceneType.Scene_Game);
 
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace Dungeon
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            sceneManager.Destroy();
         }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace Dungeon
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
             sceneManager.Draw(spriteBatch);

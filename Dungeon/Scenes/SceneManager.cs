@@ -45,7 +45,7 @@ namespace Dungeon.Scenes
         {
             foreach(Scene scene in sceneContainer.Values)
             {
-                scene.OnDestroy();
+                scene.Unload();
             }
             sceneContainer.Clear();
             sceneToRemove.Clear();
@@ -55,12 +55,12 @@ namespace Dungeon.Scenes
         public void Update(float dt)
         {
             if (sceneContainer.Count <= 0) return;
-            if (sceneContainer.Last.IsTranscendent && sceneContainer.Count > 1)
+            if (sceneContainer.Last.isTranscendent && sceneContainer.Count > 1)
             {
                 int j = sceneContainer.Count - 1; // j records last transcendent scene index
                 foreach (var scene in sceneContainer.Reverse())
                 {
-                    if (!scene.Value.IsTranscendent) break;
+                    if (!scene.Value.isTranscendent) break;
                     j--;
                 }
                 for (int i = j; i < sceneContainer.Count; i++)
@@ -77,12 +77,12 @@ namespace Dungeon.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             if (sceneContainer.Count <= 0) return;
-            if (sceneContainer.Last.IsTransparent && sceneContainer.Count > 1)
+            if (sceneContainer.Last.isTransparent && sceneContainer.Count > 1)
             {
                 int j = sceneContainer.Count - 1;
                 foreach(var scene in sceneContainer.Reverse())
                 {
-                    if (!scene.Value.IsTransparent) break;
+                    if (!scene.Value.isTransparent) break;
                     j--;
                 }
                 for(int i = j; i < sceneContainer.Count; i++)
@@ -124,7 +124,7 @@ namespace Dungeon.Scenes
             Scene newScene = factories[type]();
             if (newScene == null) return;
             sceneContainer.Add(type, newScene);
-            newScene.OnCreate();
+            newScene.Load();
         }
 
         public void Remove(SceneType type)
@@ -144,7 +144,7 @@ namespace Dungeon.Scenes
         {
             if(sceneContainer.ContainsKey(type))
             {
-                sceneContainer[type].OnDestroy();
+                sceneContainer[type].Unload();
                 sceneContainer.Remove(type);
             }
         }
