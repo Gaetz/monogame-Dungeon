@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Dungeon
 {
-    internal class DungeonContentManager : ContentManager, IContentService
+    internal class PlayContentManager : ContentManager, IContentService
     {
-        public DungeonContentManager(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PlayContentManager(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
-        public DungeonContentManager(IServiceProvider serviceProvider, string rootDirectory) : base(serviceProvider, rootDirectory)
+        public PlayContentManager(IServiceProvider serviceProvider, string rootDirectory) : base(serviceProvider, rootDirectory)
         {
         }
 

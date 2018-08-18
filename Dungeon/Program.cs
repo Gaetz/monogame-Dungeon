@@ -14,7 +14,7 @@ namespace Dungeon
         [STAThread]
         static void Main()
         {
-            using (var game = new Dungeon())
+            using (var game = new Play())
                 game.Run();
         }
     }

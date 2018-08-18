@@ -41,8 +41,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Dungeon.cs" />
-    <Compile Include="DungeonContentManager.cs" />
+    <Compile Include="Play.cs" />
+    <Compile Include="PlayContentManager.cs" />
     <Compile Include="Utils\Services\GameServices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

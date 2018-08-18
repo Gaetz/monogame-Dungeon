@@ -9,16 +9,16 @@ namespace Dungeon
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Dungeon : Game
+    public class Play : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SceneManager sceneManager;
-        DungeonContentManager contentManager;
+        PlayContentManager contentManager;
 
         public static GameServices GameServices;
 
-        public Dungeon()
+        public Play()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -35,7 +35,7 @@ namespace Dungeon
         {
             GameServices = new GameServices(this);
 
-            contentManager = new DungeonContentManager(Services, Content.RootDirectory);
+            contentManager = new PlayContentManager(Services, Content.RootDirectory);
             GameServices.AddService<IContentService>(contentManager);
 
             sceneManager = new SceneManager();

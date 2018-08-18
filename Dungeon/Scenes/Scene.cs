@@ -27,7 +27,7 @@ namespace Dungeon.Scenes
         public Scene(SceneManager _manager)
         {
             manager = _manager;
-            content = Dungeon.GameServices.GetService<IContentService>();
+            content = Play.GameServices.GetService<IContentService>();
         }
 
         internal abstract void OnCreate();
