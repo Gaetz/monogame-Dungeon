@@ -17,21 +17,21 @@ namespace Dungeon.Scenes
         /// <summary>
         /// True when scene updates while other scene is running
         /// </summary>
-        public bool IsTranscendent { get; set; }
+        public bool isTranscendent { get; set; }
 
         /// <summary>
         /// True if scene draws while other scene is drawn
         /// </summary>
-        public bool IsTransparent { get; set; }
+        public bool isTransparent { get; set; }
 
-        public Scene(SceneManager _manager)
+        public Scene(SceneManager manager)
         {
-            manager = _manager;
-            content = Play.GameServices.GetService<IContentService>();
+            this.manager = manager;
+            content = Play.gameServices.GetService<IContentService>();
         }
 
-        internal abstract void OnCreate();
-        internal abstract void OnDestroy();
+        internal abstract void Load();
+        internal abstract void Unload();
 
         internal abstract void Activate();
         internal abstract void Deactivate();
