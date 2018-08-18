@@ -42,9 +42,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dungeon.cs" />
+    <Compile Include="DungeonContentManager.cs" />
+    <Compile Include="Utils\Services\GameServices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenes\ISceneService.cs" />
+    <Compile Include="Utils\Services\IContentServices.cs" />
+    <Compile Include="Utils\Services\ISceneService.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\Scene_Editor.cs" />

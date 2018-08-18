@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Dungeon.Utils.Services;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace Dungeon.Scenes
 {
     abstract class Scene
     {
-        public SceneManager Manager { get; }
+        protected SceneManager manager;
+        protected IContentService content;
 
         /// <summary>
         /// True when scene updates while other scene is running
@@ -21,9 +24,10 @@ namespace Dungeon.Scenes
         /// </summary>
         public bool IsTransparent { get; set; }
 
-        public Scene(SceneManager manager)
+        public Scene(SceneManager _manager)
         {
-            Manager = manager;
+            manager = _manager;
+            content = Dungeon.GameServices.GetService<IContentService>();
         }
 
         internal abstract void OnCreate();

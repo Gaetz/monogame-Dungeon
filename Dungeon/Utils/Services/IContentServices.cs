@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon.Scenes
+namespace Dungeon.Utils.Services
 {
-    interface ISceneService
+    interface IContentService
     {
-        void SwitchTo(SceneType type);
+        T Load<T>(string path); 
     }
 }

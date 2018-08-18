@@ -19,7 +19,7 @@ namespace Dungeon.Scenes
 
         internal override void OnCreate()
         {
-            image = Dungeon.Assets.Load<Texture2D>("Tiles/dirt2D");
+            image = content.Load<Texture2D>("Tiles/dirt2D");
         }
 
         internal override void OnDestroy()
@@ -29,7 +29,7 @@ namespace Dungeon.Scenes
 
         public override void Update(float dt)
         {
-
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)

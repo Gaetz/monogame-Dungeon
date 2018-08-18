@@ -14,12 +14,22 @@ namespace Dungeon.Scenes
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        internal override void OnCreate()
+        {
+
+        }
+
+        internal override void OnDestroy()
         {
 
         }
 
         public override void Update(float dt)
+        {
+
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
         {
 
         }
@@ -30,16 +40,6 @@ namespace Dungeon.Scenes
         }
 
         internal override void Deactivate()
-        {
-
-        }
-
-        internal override void OnCreate()
-        {
-
-        }
-
-        internal override void OnDestroy()
         {
 
         }

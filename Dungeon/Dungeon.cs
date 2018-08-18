@@ -1,9 +1,8 @@
 ﻿using Dungeon.Scenes;
+using Dungeon.Utils.Services;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Dungeon
 {
@@ -15,15 +14,15 @@ namespace Dungeon
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SceneManager sceneManager;
+        DungeonContentManager contentManager;
 
-        //public static IServiceProvider Services { get; }
-        public static ContentManager Assets;
+        public static GameServices GameServices;
 
         public Dungeon()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Assets = Content;
+
         }
 
         /// <summary>
@@ -34,7 +33,14 @@ namespace Dungeon
         /// </summary>
         protected override void Initialize()
         {
+            GameServices = new GameServices(this);
+
+            contentManager = new DungeonContentManager(Services, Content.RootDirectory);
+            GameServices.AddService<IContentService>(contentManager);
+
             sceneManager = new SceneManager();
+            GameServices.AddService<ISceneService>(sceneManager);
+
 
             base.Initialize();
         }
