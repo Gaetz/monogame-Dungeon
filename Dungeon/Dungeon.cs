@@ -1,21 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dungeon.Scenes;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Dungeon
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Dungeon : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SceneManager sceneManager;
 
-        public Game1()
+        //public static IServiceProvider Services { get; }
+        public static ContentManager Assets;
+
+        public Dungeon()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Assets = Content;
         }
 
         /// <summary>
@@ -26,7 +34,7 @@ namespace Dungeon
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            sceneManager = new SceneManager();
 
             base.Initialize();
         }
@@ -39,6 +47,7 @@ namespace Dungeon
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            sceneManager.SwitchTo(SceneType.Scene_Game);
 
             // TODO: use this.Content to load your game content here
         }
@@ -62,7 +71,8 @@ namespace Dungeon
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            sceneManager.Update(dt);
 
             base.Update(gameTime);
         }
@@ -74,9 +84,11 @@ namespace Dungeon
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            sceneManager.Draw(spriteBatch);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
