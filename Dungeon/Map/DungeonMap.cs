@@ -1,4 +1,5 @@
 ﻿using Dungeon.Utils;
+using Dungeon.Utils.Services;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Dungeon.Map
 
     class DungeonMap
     {
-        Random random = new Random();
+        IRandomService random;
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -29,6 +30,7 @@ namespace Dungeon.Map
 
         public DungeonMap()
         {
+            random = Play.gameServices.GetService<IRandomService>();
             createdRooms = new List<Room>();
             Length = 10;
         }
@@ -45,7 +47,7 @@ namespace Dungeon.Map
             // Start room
             int startX = random.Next(9);
             int startY = random.Next(6);
-            CreateRoom(startX, startY);
+            CreateRoom(startX, startY, true);
 
             // Other rooms
             while(createdRooms.Count < Length)
@@ -74,7 +76,14 @@ namespace Dungeon.Map
                 else continue;
                 if (Rooms[y, x] == null)
                 {
-                    CreateRoom(x, y);
+                    if(createdRooms.Count == Length - 1)
+                    {
+                        CreateRoom(x, y, true);
+                    }
+                    else
+                    {
+                        CreateRoom(x, y);
+                    }
                     selectedRoom.CreateDoor(direction);
                     int inverseDirection = ((int)direction + 2) % 4;
                     Rooms[y, x].CreateDoor((Direction)inverseDirection);
@@ -82,9 +91,9 @@ namespace Dungeon.Map
             }
         }
 
-        private void CreateRoom(int x, int y)
+        private void CreateRoom(int x, int y, bool startOrLast = false)
         {
-            Rooms[y, x] = new Room(x, y);
+            Rooms[y, x] = new Room(x, y, startOrLast);
             TileMap3D tileMap = new TileMap3D();
             tileMap.Room = Rooms[y, x];
 

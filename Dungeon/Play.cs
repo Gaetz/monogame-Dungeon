@@ -14,6 +14,7 @@ namespace Dungeon
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SceneManager sceneManager;
+        RandomManager randomManager;
         PlayContentManager contentManager;
 
         public static GameServices gameServices;
@@ -41,6 +42,8 @@ namespace Dungeon
             sceneManager = new SceneManager();
             gameServices.AddService<ISceneService>(sceneManager);
 
+            randomManager = new RandomManager();
+            gameServices.AddService<IRandomService>(randomManager);
 
             base.Initialize();
         }

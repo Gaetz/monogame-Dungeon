@@ -27,7 +27,7 @@ namespace Dungeon.Map
                 for (int c = 0; c < Room.Height; c++)
                 {
                     int id = GetTileId(r, c);
-                    if (id >= 0)
+                    if (id > 0)
                     {
                         Point pos = new Point(c * TileWidth, r * TileHeight);
                         pos = IsometricTools.To3D(pos);
