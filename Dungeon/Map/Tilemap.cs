@@ -12,10 +12,10 @@ namespace Dungeon.Map
 {
     abstract class TileMap
     {
-        public int tileWidth { get; private set; }
-        public int tileHeight { get; private set; }
-        public Room room { protected get; set; }
-        public Point offset { protected get; set; }
+        public int TileWidth { get; private set; }
+        public int TileHeight { get; private set; }
+        public Room Room { protected get; set; }
+        public Point Offset { protected get; set; }
 
         protected IContentService content;
         protected List<Texture2D> textures;
@@ -28,14 +28,14 @@ namespace Dungeon.Map
 
         public void SetTileSize(int tileWidth, int tileHeight)
         {
-            this.tileWidth = tileWidth;
-            this.tileHeight = tileHeight;
+            this.TileWidth = tileWidth;
+            this.TileHeight = tileHeight;
         }
 
         public int GetTileId(int row, int col)
         {
-            if (row >= 0 && row < room.height && col >= 0 && col < room.width)
-                return room.Data[row, col];
+            if (row >= 0 && row < Room.Height && col >= 0 && col < Room.Width)
+                return Room.Data[row, col];
             return -1;
         }
 

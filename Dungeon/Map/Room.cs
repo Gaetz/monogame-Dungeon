@@ -6,27 +6,41 @@ using System.Threading.Tasks;
 
 namespace Dungeon.Map
 {
+    enum DoorDirection
+    {
+        Up = 1,
+        Right,
+        Down,
+        Left
+    }
+
     class Room
     {
-        public TileMap tileMap { get; set; }
+        public TileMap TileMap { get; set; }
 
         public int[,] Data {
             get { return data; }
             set
             {
                 data = value;
-                width = data.GetLength(0);
-                height = data.GetLength(1);
+                Width = data.GetLength(0);
+                Height = data.GetLength(1);
             }
         }
         private int[,] data;
 
-        public int width { get; private set; }
-        public int height { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
+        /// <summary>
+        /// True if there is a door Up / Right / Down / Left
+        /// </summary>
+        public bool[] Doors { get; private set; }
 
         public Room()
         {
             Generate();
+            Doors = new bool[4] { false, false, false, false };
         }
 
         private void Generate()
@@ -36,13 +50,13 @@ namespace Dungeon.Map
                 { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
                 { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
                 { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                { 3, 1, 2, 2, 2, 1, 1, 1, 1, 3 },
-                { 2, 1, 2, 2, 2, 1, 1, 1, 1, 3 },
-                { 2, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
+                { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
+                { 3, 1, 1, 1, 2, 2, 1, 1, 1, 3 },
+                { 3, 1, 1, 1, 2, 2, 1, 1, 1, 3 },
                 { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
                 { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                { 3, 2, 2, 2, 2, 2, 2, 2, 2, 3 },
-                { 3, 3, 3, 3, 2, 2, 3, 3, 3, 3 }
+                { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
+                { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 }
             };
         }
     }

@@ -20,19 +20,19 @@ namespace Dungeon.Map
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (room == null) return;
-            for (int r = 0; r < room.width; r++)
+            if (Room == null) return;
+            for (int r = 0; r < Room.Width; r++)
             {
-                for (int c = 0; c < room.height; c++)
+                for (int c = 0; c < Room.Height; c++)
                 {
                     int id = GetTileId(r, c);
                     if (id >= 0)
                     {
-                        Point pos = new Point(c * tileWidth, r * tileHeight);
+                        Point pos = new Point(c * TileWidth, r * TileHeight);
                         Texture2D texture = textures[id - 1];
                         if (texture != null)
                         {
-                            spriteBatch.Draw(texture, new Rectangle(pos + offset, new Point(texture.Width, texture.Height)), Color.White);
+                            spriteBatch.Draw(texture, new Rectangle(pos + Offset, new Point(texture.Width, texture.Height)), Color.White);
                         }
                     }
                 }

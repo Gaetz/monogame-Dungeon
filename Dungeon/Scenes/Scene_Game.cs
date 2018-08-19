@@ -12,6 +12,8 @@ namespace Dungeon.Scenes
     internal class Scene_Game : Scene
     {
         List<Room> rooms;
+        DungeonMap dungeon;
+        DungeonMinimap minimap;
 
         public Scene_Game(SceneManager manager) : base(manager)
         {
@@ -20,11 +22,18 @@ namespace Dungeon.Scenes
 
         internal override void Load()
         {
+            // Dungeon
+            dungeon = new DungeonMap();
+            dungeon.Generate(9, 6);
+            minimap = new DungeonMinimap();
+            minimap.DungeonMap = dungeon;
+
+            // Room
             Room room = new Room();
             TileMap3D tileMap = new TileMap3D();
-            tileMap.room = room;
-            tileMap.offset = new Point(400, 0);
-            room.tileMap = tileMap;
+            tileMap.Room = room;
+            tileMap.Offset = new Point(400, 100);
+            room.TileMap = tileMap;
             rooms.Add(room);
         }
 
@@ -42,13 +51,9 @@ namespace Dungeon.Scenes
         {
             foreach(Room room in rooms)
             {
-                room.tileMap.Draw(spriteBatch);
+                room.TileMap.Draw(spriteBatch);
             }
-            // Draw 2D map
-            
-
-            // Draw 3D map
-            
+            minimap.Draw(spriteBatch);
         }
 
         internal override void Activate()

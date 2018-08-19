@@ -17,12 +17,12 @@ namespace Dungeon.Scenes
         /// <summary>
         /// True when scene updates while other scene is running
         /// </summary>
-        public bool isTranscendent { get; set; }
+        public bool IsTranscendent { get; set; }
 
         /// <summary>
         /// True if scene draws while other scene is drawn
         /// </summary>
-        public bool isTransparent { get; set; }
+        public bool IsTransparent { get; set; }
 
         public Scene(SceneManager manager)
         {
