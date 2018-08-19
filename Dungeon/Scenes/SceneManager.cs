@@ -21,7 +21,7 @@ namespace Dungeon.Scenes
     {
         private OrderedDictionary<SceneType, Scene> sceneContainer;
         private List<SceneType> sceneToRemove;
-        Dictionary<SceneType, Func<Scene>> factories;
+        private Dictionary<SceneType, Func<Scene>> factories;
 
         public Scene CurrentScene
         {
@@ -55,12 +55,12 @@ namespace Dungeon.Scenes
         public void Update(float dt)
         {
             if (sceneContainer.Count <= 0) return;
-            if (sceneContainer.Last.isTranscendent && sceneContainer.Count > 1)
+            if (sceneContainer.Last.IsTranscendent && sceneContainer.Count > 1)
             {
                 int j = sceneContainer.Count - 1; // j records last transcendent scene index
                 foreach (var scene in sceneContainer.Reverse())
                 {
-                    if (!scene.Value.isTranscendent) break;
+                    if (!scene.Value.IsTranscendent) break;
                     j--;
                 }
                 for (int i = j; i < sceneContainer.Count; i++)
@@ -77,12 +77,12 @@ namespace Dungeon.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             if (sceneContainer.Count <= 0) return;
-            if (sceneContainer.Last.isTransparent && sceneContainer.Count > 1)
+            if (sceneContainer.Last.IsTransparent && sceneContainer.Count > 1)
             {
                 int j = sceneContainer.Count - 1;
                 foreach(var scene in sceneContainer.Reverse())
                 {
-                    if (!scene.Value.isTransparent) break;
+                    if (!scene.Value.IsTransparent) break;
                     j--;
                 }
                 for(int i = j; i < sceneContainer.Count; i++)
