@@ -32,7 +32,7 @@ namespace Dungeon.Map
         {
             random = Play.gameServices.GetService<IRandomService>();
             createdRooms = new List<Room>();
-            Length = 10;
+            Length = Balance.DungeonLength;
         }
 
         public void Generate(int width, int height)

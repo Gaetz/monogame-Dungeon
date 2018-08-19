@@ -52,6 +52,7 @@
     <Compile Include="Play.cs" />
     <Compile Include="PlayContentManager.cs" />
     <Compile Include="RandomManager.cs" />
+    <Compile Include="Balance.cs" />
     <Compile Include="Utils\IsometricTools.cs" />
     <Compile Include="Utils\Services\GameServices.cs" />
     <Compile Include="Program.cs" />

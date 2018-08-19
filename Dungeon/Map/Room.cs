@@ -43,7 +43,7 @@ namespace Dungeon.Map
             if (startOrLast) isCorridor = false;
             else
             {
-                isCorridor = random.Next(2) == 0;
+                isCorridor = random.Next(Balance.CorridorScarcity) == 0;
             }
             Generate();
             Doors = new bool[4] { false, false, false, false };
@@ -71,16 +71,16 @@ namespace Dungeon.Map
             {
                 Data = new int[,] 
                 {
-                    { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 2, 2, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 2, 2, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 3 },
-                    { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 }
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 0, 3, 3, 3, 3, 3, 3, 3, 3, 0 },
+                    { 0, 3, 1, 1, 1, 1, 1, 1, 3, 0 },
+                    { 0, 3, 1, 1, 1, 1, 1, 1, 3, 0 },
+                    { 0, 3, 1, 1, 2, 2, 1, 1, 3, 0 },
+                    { 0, 3, 1, 1, 2, 2, 1, 1, 3, 0 },
+                    { 0, 3, 1, 1, 1, 1, 1, 1, 3, 0 },
+                    { 0, 3, 1, 1, 1, 1, 1, 1, 3, 0 },
+                    { 0, 3, 3, 3, 3, 3, 3, 3, 3, 0 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
                 };
             }
 
@@ -163,20 +163,36 @@ namespace Dungeon.Map
                 switch (direction)
                 {
                     case Direction.Up:
-                        Data[0, 4] = 2;
-                        Data[0, 5] = 2;
+                        Data[0, 3] = 3;
+                        Data[0, 4] = 1;
+                        Data[0, 5] = 1;
+                        Data[0, 6] = 3;
+                        Data[1, 4] = 2;
+                        Data[1, 5] = 2;
                         break;
                     case Direction.Down:
-                        Data[9, 4] = 2;
-                        Data[9, 5] = 2;
+                        Data[9, 3] = 3;
+                        Data[9, 4] = 1;
+                        Data[9, 5] = 1;
+                        Data[9, 6] = 3;
+                        Data[8, 4] = 2;
+                        Data[8, 5] = 2;
                         break;
                     case Direction.Left:
-                        Data[4, 0] = 2;
-                        Data[5, 0] = 2;
+                        Data[3, 0] = 3;
+                        Data[4, 0] = 1;
+                        Data[5, 0] = 1;
+                        Data[6, 0] = 3;
+                        Data[4, 1] = 2;
+                        Data[5, 1] = 2;
                         break;
                     case Direction.Right:
-                        Data[4, 9] = 2;
-                        Data[5, 9] = 2;
+                        Data[3, 9] = 3;
+                        Data[4, 9] = 1;
+                        Data[5, 9] = 1;
+                        Data[6, 9] = 3;
+                        Data[4, 8] = 2;
+                        Data[5, 8] = 2;
                         break;
                 }
             }
