@@ -15,6 +15,7 @@ namespace Dungeon.Scenes
         List<Room> rooms;
         DungeonMap dungeon;
         DungeonMinimap minimap;
+        Camera camera;
 
         public Scene_Game(SceneManager manager) : base(manager)
         {
@@ -29,13 +30,8 @@ namespace Dungeon.Scenes
             minimap = new DungeonMinimap();
             minimap.DungeonMap = dungeon;
 
-            // Room
-            /*Room room = new Room(0, 0);
-            TileMap3D tileMap = new TileMap3D();
-            tileMap.Room = room;
-            tileMap.Offset = new Point(400, 100);
-            room.TileMap = tileMap;
-            rooms.Add(room);*/
+            // Camera
+            camera = new Camera();
         }
 
         internal override void Unload()
@@ -56,13 +52,40 @@ namespace Dungeon.Scenes
             {
                 hit = false;
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                camera.Y -= camera.Speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                camera.Y += camera.Speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                camera.X -= camera.Speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                camera.X += camera.Speed;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            foreach(Room room in rooms)
+            /*foreach(Room room in rooms)
             {
                 room.TileMap.Draw(spriteBatch);
+            }*/
+            for (int i = 0; i < dungeon.Height; i++)
+            {
+                for (int j = 0; j < dungeon.Width; j++)
+                {
+                    if(dungeon.Rooms[i, j] != null)
+                    {
+                        dungeon.Rooms[i, j].TileMap.Draw(spriteBatch, camera);
+                    }
+                }
             }
             minimap.Draw(spriteBatch);
         }

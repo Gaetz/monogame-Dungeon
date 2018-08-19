@@ -54,5 +54,28 @@ namespace Dungeon.Map
                 { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 }
             };
         }
+
+        public void CreateDoor(Direction direction)
+        {
+            switch(direction)
+            {
+                case Direction.Up:
+                    Data[0, 4] = 2;
+                    Data[0, 5] = 2;
+                    break;
+                case Direction.Down:
+                    Data[9, 4] = 2;
+                    Data[9, 5] = 2;
+                    break;
+                case Direction.Left:
+                    Data[4, 0] = 2;
+                    Data[5, 0] = 2;
+                    break;
+                case Direction.Right:
+                    Data[4, 9] = 2;
+                    Data[5, 9] = 2;
+                    break;
+            }
+        }
     }
 }

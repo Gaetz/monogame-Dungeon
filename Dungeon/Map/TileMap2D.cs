@@ -18,7 +18,7 @@ namespace Dungeon.Map
             SetTileSize(32, 32);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, Camera camera)
         {
             if (Room == null) return;
             for (int r = 0; r < Room.Width; r++)
@@ -32,7 +32,7 @@ namespace Dungeon.Map
                         Texture2D texture = textures[id - 1];
                         if (texture != null)
                         {
-                            spriteBatch.Draw(texture, new Rectangle(pos + Offset, new Point(texture.Width, texture.Height)), Color.White);
+                            spriteBatch.Draw(texture, new Rectangle(pos + Offset - camera.Coords, new Point(texture.Width, texture.Height)), Color.White);
                         }
                     }
                 }

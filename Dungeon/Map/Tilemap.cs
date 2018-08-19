@@ -15,7 +15,7 @@ namespace Dungeon.Map
         public int TileWidth { get; private set; }
         public int TileHeight { get; private set; }
         public Room Room { protected get; set; }
-        public Point Offset { protected get; set; }
+        public Point Offset { get; set; }
 
         protected IContentService content;
         protected List<Texture2D> textures;
@@ -39,6 +39,6 @@ namespace Dungeon.Map
             return -1;
         }
 
-        public abstract void Draw(SpriteBatch spritebatch);
+        public abstract void Draw(SpriteBatch spritebatch, Camera camera);
     }
 }

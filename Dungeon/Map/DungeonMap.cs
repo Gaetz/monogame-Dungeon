@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dungeon.Utils;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace Dungeon.Map
 {
     public enum Direction
     {
-        Up = 1,
+        Up = 0,
         Right,
         Down,
         Left
@@ -28,7 +30,7 @@ namespace Dungeon.Map
         public DungeonMap()
         {
             createdRooms = new List<Room>();
-            Length = 15;
+            Length = 10;
         }
 
         public void Generate(int width, int height)
@@ -50,7 +52,7 @@ namespace Dungeon.Map
             {
                 int index = random.Next(createdRooms.Count);
                 Room selectedRoom = createdRooms[index];
-                Direction direction = (Direction)(random.Next(4) + 1);
+                Direction direction = (Direction)random.Next(4);
                 int x = selectedRoom.X;
                 int y = selectedRoom.Y;
                 if (direction == Direction.Up && selectedRoom.Y > 0)
@@ -73,6 +75,9 @@ namespace Dungeon.Map
                 if (Rooms[y, x] == null)
                 {
                     CreateRoom(x, y);
+                    selectedRoom.CreateDoor(direction);
+                    int inverseDirection = ((int)direction + 2) % 4;
+                    Rooms[y, x].CreateDoor((Direction)inverseDirection);
                 }
             }
         }
@@ -80,6 +85,14 @@ namespace Dungeon.Map
         private void CreateRoom(int x, int y)
         {
             Rooms[y, x] = new Room(x, y);
+            TileMap3D tileMap = new TileMap3D();
+            tileMap.Room = Rooms[y, x];
+
+            tileMap.Offset = new Point(x * 320, y * 320);
+            tileMap.Offset = IsometricTools.To3D(tileMap.Offset);
+
+            Rooms[y, x].TileMap = tileMap;
+
             createdRooms.Add(Rooms[y, x]);
         }
     }

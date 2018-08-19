@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Map\Camera.cs" />
     <Compile Include="Map\DungeonMap.cs" />
     <Compile Include="Map\DungeonMinimap.cs" />
     <Compile Include="Map\Room.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Map\TileMap3D.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="PlayContentManager.cs" />
+    <Compile Include="Utils\IsometricTools.cs" />
     <Compile Include="Utils\Services\GameServices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
