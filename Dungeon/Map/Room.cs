@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace Dungeon.Map
 {
-    enum DoorDirection
-    {
-        Up = 1,
-        Right,
-        Down,
-        Left
-    }
-
     class Room
     {
         public TileMap TileMap { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
         public int[,] Data {
             get { return data; }
@@ -29,16 +25,15 @@ namespace Dungeon.Map
         }
         private int[,] data;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
-
         /// <summary>
         /// True if there is a door Up / Right / Down / Left
         /// </summary>
         public bool[] Doors { get; private set; }
 
-        public Room()
+        public Room(int x, int y)
         {
+            X = x;
+            Y = y;
             Generate();
             Doors = new bool[4] { false, false, false, false };
         }

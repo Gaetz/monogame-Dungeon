@@ -22,7 +22,7 @@ namespace Dungeon.Map
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int txWidth = 50;
+            int txWidth = 10;
             int txHeight = 10;
             if (roomTx == null)
             {

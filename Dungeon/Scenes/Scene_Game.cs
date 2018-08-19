@@ -1,6 +1,7 @@
 ﻿using Dungeon.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,12 @@ namespace Dungeon.Scenes
             minimap.DungeonMap = dungeon;
 
             // Room
-            Room room = new Room();
+            /*Room room = new Room(0, 0);
             TileMap3D tileMap = new TileMap3D();
             tileMap.Room = room;
             tileMap.Offset = new Point(400, 100);
             room.TileMap = tileMap;
-            rooms.Add(room);
+            rooms.Add(room);*/
         }
 
         internal override void Unload()
@@ -42,9 +43,19 @@ namespace Dungeon.Scenes
 
         }
 
+        bool hit = false;
+
         public override void Update(float dt)
         {
-            
+            if(Keyboard.GetState().IsKeyDown(Keys.Space) && !hit)
+            {
+                dungeon.Generate(9, 6);
+                hit = true;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space) && hit)
+            {
+                hit = false;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
