@@ -11,46 +11,21 @@ namespace Dungeon.Scenes
 {
     internal class Scene_Game : Scene
     {
-        List<Texture2D> textures2D;
-        List<Texture2D> textures3D;
-        Tilemap map;
-
-        Point mapOrigin2D;
-        Point mapOrigin3D;
-
+        List<Room> rooms;
 
         public Scene_Game(SceneManager manager) : base(manager)
         {
-            map = new Tilemap();
-            textures2D = new List<Texture2D>();
-            textures3D = new List<Texture2D>();
+            rooms = new List<Room>();
         }
 
         internal override void Load()
         {
-            textures2D.Add(content.Load<Texture2D>("Tiles/dirt2D"));
-            textures2D.Add(content.Load<Texture2D>("Tiles/stone2D"));
-            textures3D.Add(content.Load<Texture2D>("Tiles/dirt3D"));
-            textures3D.Add(content.Load<Texture2D>("Tiles/stone3D"));
-
-            map.SetTileSize2D(32, 32);
-            map.SetTileSize3D(64, 32);
-            int[,] data = new int[,]
-            {
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 1, 2, 2, 2, 1, 1, 1, 1, 1 },
-                { 1, 1, 2, 2, 2, 1, 1, 1, 1, 1 },
-                { 1, 1, 2, 2, 2, 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-            };
-            map.SetData(data);
-            mapOrigin2D = new Point(20, 80);
-            mapOrigin3D = new Point(650, 80);
+            Room room = new Room();
+            TileMap3D tileMap = new TileMap3D();
+            tileMap.room = room;
+            tileMap.offset = new Point(400, 0);
+            room.tileMap = tileMap;
+            rooms.Add(room);
         }
 
         internal override void Unload()
@@ -65,42 +40,15 @@ namespace Dungeon.Scenes
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw 2D map
-            for (int r = 0; r < map.mapWidth; r++)
+            foreach(Room room in rooms)
             {
-                for (int c = 0; c < map.mapHeight; c++)
-                {
-                    int id = map.GetTileId(r, c);
-                    if (id >= 0)
-                    {
-                        Point pos = new Point(c * map.tileWidth2D, r * map.tileHeight2D);
-                        Texture2D texture = textures2D[id - 1];
-                        if(texture != null)
-                        {
-                            spriteBatch.Draw(texture, new Rectangle(pos + mapOrigin2D, new Point(texture.Width, texture.Height)), Color.White);
-                        }
-                    }
-                }
+                room.tileMap.Draw(spriteBatch);
             }
+            // Draw 2D map
+            
 
             // Draw 3D map
-            for (int r = 0; r < map.mapWidth; r++)
-            {
-                for (int c = 0; c < map.mapHeight; c++)
-                {
-                    int id = map.GetTileId(r, c);
-                    if (id >= 0)
-                    {
-                        Point pos = new Point(c * map.tileWidth2D, r * map.tileHeight2D);
-                        pos = map.To3D(pos);
-                        Texture2D texture = textures3D[id - 1];
-                        if (texture != null)
-                        {
-                            spriteBatch.Draw(texture, new Rectangle(pos + mapOrigin3D, new Point(texture.Width, texture.Height)), Color.White);
-                        }
-                    }
-                }
-            }
+            
         }
 
         internal override void Activate()

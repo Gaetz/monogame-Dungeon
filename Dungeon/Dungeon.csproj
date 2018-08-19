@@ -41,7 +41,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Map\Tilemap.cs" />
+    <Compile Include="Map\DungeonMap.cs" />
+    <Compile Include="Map\Room.cs" />
+    <Compile Include="Map\TileMap.cs" />
+    <Compile Include="Map\TileMap2D.cs" />
+    <Compile Include="Map\TileMap3D.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="PlayContentManager.cs" />
     <Compile Include="Utils\Services\GameServices.cs" />
